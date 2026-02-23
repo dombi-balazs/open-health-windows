@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "open_health_windows (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "open_health_windows (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
