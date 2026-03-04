@@ -1,6 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup>
+    <Source>C:\Work\computer-science\open-health-windows\open_health_windows\Assets\app_logo.png</Source>
+    <SmallTileSource>C:\Work\computer-science\open-health-windows\open_health_windows\Assets\app_logo.png</SmallTileSource>
+    <MediumTileSource>C:\Work\computer-science\open-health-windows\open_health_windows\Assets\app_logo.png</MediumTileSource>
+    <WideTileSource>C:\Work\computer-science\open-health-windows\open_health_windows\Assets\app_logo.png</WideTileSource>
+    <LargeTileSource>C:\Work\computer-science\open-health-windows\open_health_windows\Assets\app_logo.png</LargeTileSource>
+    <AppIconSource>C:\Work\computer-science\open-health-windows\open_health_windows\Assets\app_logo.png</AppIconSource>
+    <SplashScreenSource>C:\Work\computer-science\open-health-windows\open_health_windows\Assets\app_logo.png</SplashScreenSource>
+    <PackageLogoSource>C:\Work\computer-science\open-health-windows\open_health_windows\Assets\app_logo.png</PackageLogoSource>
+  </PropertyGroup>
   <ItemGroup>
     <None Update="App.xaml">
       <SubType>Designer</SubType>
