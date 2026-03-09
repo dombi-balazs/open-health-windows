@@ -1,30 +1,34 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Imaging;
+using open_health_windows.Entities;
+using open_health_windows.Services;
 using System;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Storage.Streams;
 
 namespace open_health_windows.Views
 {
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainWindow : Window
     {
+        private readonly IGitHubService _gitHubService;
+        private ImageEntity? _currentLoadedImage;
+
         public MainWindow()
         {
             InitializeComponent();
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(AppTitleBar);
+
+            _gitHubService = new GitHubService();
         }
 
         public async void GitHubButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var uri = new Uri("https://github.com/dombi-balazs/open-health-windows");
-                bool success = await Windows.System.Launcher.LaunchUriAsync(uri);
+                bool success = await _gitHubService.LaunchRepositoryAsync();
+                ShowInfoBar("Success", "Opened the GitHub page in the browser.", InfoBarSeverity.Success);
 
                 if (!success)
                 {
@@ -38,6 +42,30 @@ namespace open_health_windows.Views
             catch (Exception ex)
             {
                 ShowInfoBar("Unexpected Error", $"An error occurred during the operation: {ex.Message}", InfoBarSeverity.Error);
+            }
+        }
+
+        public async void LoadImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            var imageService = new ImageService();
+            var windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(this);
+
+            _currentLoadedImage = await imageService.LoadImageAsync(windowHandle);
+
+            if (_currentLoadedImage != null && _currentLoadedImage.ImageByteArray.Length > 0)
+            {
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.DecodePixelWidth = 600;
+
+                using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
+                {
+                    await stream.WriteAsync(_currentLoadedImage.ImageByteArray.AsBuffer());
+                    stream.Seek(0);
+                    await bitmapImage.SetSourceAsync(stream);
+                }
+
+                LoadedImage.Source = bitmapImage;
+                ShowInfoBar("Success", "Image loaded and converted to bytes successfully.", InfoBarSeverity.Success);
             }
         }
 

@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace open_health_windows.Entities
 {
-    class ImageEntity
+    internal class ImageEntity
     {
         public string? ImagePath { get; set; }
-
         public byte[] ImageByteArray { get; set; } = Array.Empty<byte>();
-
     }
 }

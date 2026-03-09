@@ -16,20 +16,20 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TitleBar x:Name="AppTitleBar"
-      Title="Open Health">
+
+        <TitleBar x:Name="AppTitleBar" Title="Open Health" Grid.Row="0">
             <TitleBar.IconSource>
                 <ImageIconSource ImageSource="ms-appx:///Assets/app_logo.png"/>
             </TitleBar.IconSource>
         </TitleBar>
 
-        <InfoBar x:Name="AppInfoBar" IsOpen="False" />
+        <InfoBar x:Name="AppInfoBar" IsOpen="False" Grid.Row="1" />
 
-        <Grid Grid.Row="1" RowSpacing="20" Margin="20,20,20,20">
+        <Grid Grid.Row="2" RowSpacing="20" Margin="20,20,20,20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -43,7 +43,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Content="Load new image" Grid.Column="0" Grid.Row="0"/>
+            <Button Content="Load new image" Grid.Column="0" Grid.Row="0" Click="LoadImageButton_Click"/>
             <Button Content="Analyze Image" Grid.Column="0" Grid.Row="1"/>
             <Button Content="Save Result" Grid.Column="0" Grid.Row="2"/>
             <DropDownButton Grid.Column="0" Grid.Row="3">
@@ -55,8 +55,9 @@
                     </MenuFlyout>
                 </DropDownButton.Flyout>
             </DropDownButton>
-            <Image Source="/Assets/cat.jpg" Grid.Column="1" MaxWidth="200" Margin="100,0,100,0" Grid.RowSpan="4"/>
+            <Image x:Name="LoadedImage" Grid.Column="1" MaxWidth="200" Margin="100,0,100,0" Grid.RowSpan="4"/>
         </Grid>
-        <HyperlinkButton Content="View on GitHub" VerticalAlignment="Bottom" Grid.Row="2" HorizontalAlignment="Right" Click="GitHubButton_Click" Margin="20,20,20,20"/>
+
+        <HyperlinkButton Content="View on GitHub" VerticalAlignment="Bottom" Grid.Row="3" HorizontalAlignment="Right" Click="GitHubButton_Click" Margin="20,20,20,20"/>
     </Grid>
 </Window>

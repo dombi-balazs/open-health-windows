@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.UI.Xaml.Media.Imaging;
+using open_health_windows.Entities;
 
 namespace open_health_windows.Services
 {
-    interface Interface1
+    internal interface IImageService
     {
+        Task<ImageEntity?> LoadImageAsync(IntPtr windowHandle);
+
     }
 }
