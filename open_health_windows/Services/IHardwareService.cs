@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace open_health_windows.Services
 {
-    interface IHardwareService
+    internal interface IHardwareService
     {
+        Task InitializeAIPCHardwareAsync();
+
+        List<string> GetAvailableExecutionProviders();
+
+        bool IsHardwareAvailable(string providerName);
     }
 }

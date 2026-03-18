@@ -27,37 +27,67 @@
             </TitleBar.IconSource>
         </TitleBar>
 
-        <InfoBar x:Name="AppInfoBar" IsOpen="False" Grid.Row="1" />
+        <InfoBar x:Name="AppInfoBar" IsOpen="False" Grid.Row="1" Margin="20,5,20,5" />
 
-        <Grid Grid.Row="2" RowSpacing="20" Margin="20,20,20,20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <Grid Grid.Row="2" Margin="20">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button Content="Load new image" Grid.Column="0" Grid.Row="0" Click="LoadImageButton_Click"/>
-            <Button Content="Analyze Image" Grid.Column="0" Grid.Row="1"/>
-            <Button Content="Save Result" Grid.Column="0" Grid.Row="2"/>
-            <DropDownButton Grid.Column="0" Grid.Row="3">
-                <TextBlock FontFamily="Segoe" FontSize="14" Text="Choose hardware"/>
-                <DropDownButton.Flyout>
-                    <MenuFlyout Placement="BottomEdgeAlignedLeft">
-                        <MenuFlyoutItem Text="CPU" Icon="AlignLeft" Tag="left"/>
-                        <MenuFlyoutItem Text="NPU" Icon="AlignCenter" Tag="center"/>
-                    </MenuFlyout>
-                </DropDownButton.Flyout>
-            </DropDownButton>
-            <Image x:Name="LoadedImage" Grid.Column="1" MaxWidth="200" Margin="100,0,100,0" Grid.RowSpan="4"/>
+            <StackPanel Grid.Column="0" Spacing="10">
+                <Button Content="Load new image" Click="LoadImageButton_Click" HorizontalAlignment="Stretch"/>
+                <Button Content="Load folder" Click="LoadFolderButton_Click" HorizontalAlignment="Stretch"/>
+
+                <DropDownButton HorizontalAlignment="Stretch">
+                    <TextBlock x:Name="SelectedHardwareText" Text="Hardware: CPU"/>
+                    <DropDownButton.Flyout>
+                        <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                            <MenuFlyoutItem Text="CPU" Tag="CPU" Click="HardwareMenu_Click"/>
+                            <MenuFlyoutItem Text="iGPU" Tag="iGPU" Click="HardwareMenu_Click"/>
+                            <MenuFlyoutItem Text="NPU" Tag="NPU" Click="HardwareMenu_Click"/>
+                        </MenuFlyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+
+                <StackPanel Spacing="5" Margin="0,10,0,10">
+                    <TextBlock Text="Model Precision:" FontWeight="Medium" FontSize="12"/>
+                    <RadioButton x:Name="FloatModelRadio" Content="FP32 (Original)" IsChecked="True" GroupName="ModelType"/>
+                    <RadioButton x:Name="QuantizedModelRadio" Content="INT8 (Quantized)" GroupName="ModelType"/>
+                </StackPanel>
+
+                <Button Content="Analyze" Click="AnalyzeButton_Click" HorizontalAlignment="Stretch" Style="{StaticResource AccentButtonStyle}"/>
+                <Button x:Name="StopButton" Content="Stop Analysis" Click="StopButton_Click" IsEnabled="False" HorizontalAlignment="Stretch"/>
+                <Button Content="Save Result" Click="SaveResultButton_Click" HorizontalAlignment="Stretch"/>
+
+                <TextBlock x:Name="ProgressText" 
+                           Text="Ready" 
+                           Margin="0,20,0,0" 
+                           FontSize="14" 
+                           FontWeight="SemiBold" 
+                           TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <Image x:Name="LoadedImage" 
+                   Grid.Column="1" 
+                   MaxWidth="400" 
+                   MaxHeight="400" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center"/>
         </Grid>
 
-        <HyperlinkButton Content="View on GitHub" VerticalAlignment="Bottom" Grid.Row="3" HorizontalAlignment="Right" Click="GitHubButton_Click" Margin="20,20,20,20"/>
+        <Grid Grid.Row="3" Margin="20,0,20,10">
+            <ProgressBar x:Name="AnalysisProgressBar" 
+             Visibility="Collapsed" 
+             HorizontalAlignment="Left" 
+             Width="200" 
+             VerticalAlignment="Center"
+             Foreground="DodgerBlue"/>
+
+            <HyperlinkButton Content="View on GitHub" 
+                             HorizontalAlignment="Right" 
+                             VerticalAlignment="Center" 
+                             Click="GitHubButton_Click"/>
+        </Grid>
     </Grid>
 </Window>

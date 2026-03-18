@@ -1,9 +1,11 @@
 ﻿using open_health_windows.Entities;
 using System;
-using System.IO; // A Stream-ekhez kell
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.Storage.Search;
 
 namespace open_health_windows.Services
 {
@@ -41,6 +43,31 @@ namespace open_health_windows.Services
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error loading image: {ex.Message}");
+            }
+            return null;
+        }
+            public async Task<IReadOnlyList<StorageFile>?> LoadFolderAsync(IntPtr windowHandle)
+        {
+            try
+            {
+                FolderPicker folderPicker = new FolderPicker();
+                WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, windowHandle);
+
+                folderPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+                folderPicker.FileTypeFilter.Add("*");
+
+                StorageFolder folder = await folderPicker.PickSingleFolderAsync();
+
+                if (folder != null)
+                {
+                    var queryOptions = new QueryOptions(CommonFileQuery.OrderByName, new[] { ".jpg", ".jpeg", ".png", ".bmp" });
+                    var query = folder.CreateFileQueryWithOptions(queryOptions);
+                    return await query.GetFilesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error while loading folder: {ex.Message}");
             }
 
             return null;

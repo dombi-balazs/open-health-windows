@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using open_health_windows.Entities;
+using System;
 using System.Threading.Tasks;
 
 namespace open_health_windows.Services
 {
-    interface IEvaluationService
+    internal interface IEvaluationService : IDisposable
     {
+        void InitializeModels(ChosenHardwareEntity.HardwareChoice hardwareChoice, string model1Path, string model2Path);
+        void SetModelMode(bool useQuantized);
+        Task<string> AnalyzeImageAsync(byte[] imageBytes);
     }
 }
