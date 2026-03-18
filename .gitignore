@@ -1,3 +1,5 @@
 /.vs
 /open_health_windows/bin
 /open_health_windows/obj
+/open_health_windows/AppPackages
+/open_health_windows/BundleArtifacts

@@ -17,7 +17,7 @@ namespace open_health_windows.Services
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Hardver inicializálási hiba: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Error occured while initializing hardware: {ex.Message}");
             }
         }
 

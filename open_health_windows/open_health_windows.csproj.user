@@ -9,6 +9,7 @@
     <AppIconSource>C:\Work\computer-science\open-health-windows\open_health_windows\Assets\app_logo.png</AppIconSource>
     <SplashScreenSource>C:\Work\computer-science\open-health-windows\open_health_windows\Assets\app_logo.png</SplashScreenSource>
     <PackageLogoSource>C:\Work\computer-science\open-health-windows\open_health_windows\Assets\app_logo.png</PackageLogoSource>
+    <_LastSelectedProfileId>C:\Work\computer-science\open-health-windows\open_health_windows\Properties\PublishProfiles\win-x64.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <None Update="App.xaml">

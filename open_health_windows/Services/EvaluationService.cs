@@ -52,7 +52,7 @@ namespace open_health_windows.Services
                 var currentSession = _useQuantized ? _sessionINT8 : _sessionFP32;
 
                 if (currentSession == null)
-                    throw new InvalidOperationException("Modellek nincsenek betöltve.");
+                    throw new InvalidOperationException("Models aren't loaded");
 
                 var inputTensor = ConvertImageToTensor(imageBytes);
 
@@ -75,8 +75,8 @@ namespace open_health_windows.Services
                     }
                 }
 
-                string label = maxIndex < _classNames.Length ? _classNames[maxIndex] : "Ismeretlen";
-                return $"{label} (Bizonyosság: {maxScore * 100:F3}%)";
+                string label = maxIndex < _classNames.Length ? _classNames[maxIndex] : "Unknown";
+                return $"{label} (Confidence: {maxScore * 100:F3}%)";
             });
         }
 

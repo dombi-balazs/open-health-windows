@@ -220,5 +220,35 @@ namespace open_health_windows.Views
         {
             AppInfoBar.Title = title; AppInfoBar.Message = message; AppInfoBar.Severity = severity; AppInfoBar.IsOpen = true;
         }
+
+        private async void RootGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            ContentDialog disclaimerDialog = new ContentDialog
+            {
+                Title = "Important Disclaimer",
+                Content = @"THIS APPLICATION IS NOT FOR MEDICAL USE. IT IS NOT ACCURATE. IT IS FOR TEST AND RESEARCH PURPOSES ONLY. It is NOT a medical device and does NOT provide real diagnosis. It is NOT reliable and should NOT be used for health purposes! 
+
+The application follows the 'Privacy by Design' principle: all data is processed locally on your computer. The AI model was trained on a limited dataset and it is NOT accurate; it frequently produces false predictions.
+
+THE ONLY PURPOSE AND LEGITIMATE USE of this software is to test and research the performance of AI models on different hardware configurations (CPU, GPU, NPU) and to compare original FP32 models with quantized INT8 versions.
+
+This software is provided 'as-is' without any warranties. It is FORBIDDEN to use for medical purposes. With any skin issues, see a doctor immediately! The developer assumes NO liability for any consequences arising from the use of this software. The user further agrees that the developer has no obligations, duties, or liabilities toward the user.
+
+By clicking 'I understand', you explicitly waive any and all legal and other enforcement rights related to this software against the developer, and you declare that you accept all the terms and provisions stated in this window.",
+                CloseButtonText = "I understand",
+                DefaultButton = ContentDialogButton.Close,
+
+                XamlRoot = this.Content.XamlRoot
+            };
+
+            try
+            {
+                await disclaimerDialog.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Hiba: {ex.Message}");
+            }
+        }
     }
 }
