@@ -52,14 +52,14 @@
                 </DropDownButton>
 
                 <StackPanel Spacing="5" Margin="0,10,0,10">
-                    <TextBlock Text="Model Precision:" FontWeight="Medium" FontSize="12"/>
+                    <TextBlock Text="Model precision:" FontWeight="Medium" FontSize="12"/>
                     <RadioButton x:Name="FloatModelRadio" Content="FP32 (Original)" IsChecked="True" GroupName="ModelType"/>
                     <RadioButton x:Name="QuantizedModelRadio" Content="INT8 (Quantized)" GroupName="ModelType"/>
                 </StackPanel>
 
                 <Button Content="Analyze" Click="AnalyzeButton_Click" HorizontalAlignment="Stretch" Style="{StaticResource AccentButtonStyle}"/>
-                <Button x:Name="StopButton" Content="Stop Analysis" Click="StopButton_Click" IsEnabled="False" HorizontalAlignment="Stretch"/>
-                <Button Content="Save Result" Click="SaveResultButton_Click" HorizontalAlignment="Stretch"/>
+                <Button x:Name="StopButton" Content="Stop analysis" Click="StopButton_Click" IsEnabled="False" HorizontalAlignment="Stretch"/>
+                <Button Content="Save result" Click="SaveResultButton_Click" HorizontalAlignment="Stretch"/>
 
                 <TextBlock x:Name="ProgressText" 
                            Text="Ready" 
